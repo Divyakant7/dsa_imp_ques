@@ -1,0 +1,23 @@
+vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+      vector<vector<int>>v;
+        int n=nums.size(),m;
+        int count = pow(2,n);
+        for(int i=0;i<count;i++){
+            int k=0;
+            vector<int>s;
+            for(int j=0;j<nums.size();j++){
+                if((i&(1<<j))!=0){
+                    s.push_back(nums[j]);
+                }
+            }
+            sort(s.begin(),s.end());
+            for(int i=0;i<v.size();i++){
+            if(v[i]==s){
+            k++;}
+            }
+            if(k==0){
+                v.push_back(s);
+            }
+        }
+        return v;  
+    }
