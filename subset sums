@@ -1,0 +1,16 @@
+    vector<int>v;
+    void solve(vector<int> arr,int sum,int i,int n){
+        if(i>n) return;
+        if(i==n){
+            v.push_back(sum);
+            return;
+        }
+        solve(arr,sum+arr[i],i+1,n);
+        solve(arr,sum,i+1,n);
+    }
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        // Write Your Code here
+        solve(arr,0,0,N);
+        return v;
+    }
