@@ -1,0 +1,40 @@
+bool valid(int A[],int M,int maxval,int N){
+        int student = 1;
+        int sum = 0;
+        for(int i =0;i<N;i++){
+            sum+=A[i];
+            if(sum>maxval){
+                student++;
+                sum = A[i];
+            }
+            if(student>M){
+                return false;
+            }
+        }
+        return true;
+    }
+    int findPages(int A[], int N, int M) 
+    {
+        int sum = 0,max1 = 0;
+        if(M>N)return -1;
+        for(int i =0;i<N;i++){
+            sum+=A[i];
+            if(A[i]>max1){
+                max1 = A[i];
+            }
+        }
+        int low = max1;
+        int high = sum;
+        int res = -1;
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(valid(A,M,mid,N)){
+                res = mid;
+                high = mid-1;
+            }
+            else{
+                low = mid+1;
+            }
+        }
+        return res;
+    }
