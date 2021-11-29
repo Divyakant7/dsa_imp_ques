@@ -1,0 +1,67 @@
+int helper(vector<int>& nums){
+        int low = 0;
+        int n = nums.size();
+        int high = nums.size()-1;
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            int next = (mid+1)%n;
+            int prev = (mid+n-1)%n;
+            if(nums[mid]>nums[prev]&&nums[mid]>nums[next]){
+                return mid;
+            }
+            else if(nums[mid]>=nums[low]){
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+        return -1;
+    }
+    int bs(vector<int>&nums,int i,int j,int target){
+        while(i<=j){
+            int mid = i+(j-i)/2;
+            if(nums[mid]==target){
+                return mid;
+            }
+            else if(nums[mid]<target){
+                i = mid+1;
+            }
+            else{
+                j = mid-1;
+            }
+        }
+        return -1;
+    }
+    int bs1(vector<int>&nums,int i,int j,int target){
+        while(i<=j){
+            int mid = (i+j)/2;
+            if(nums[mid]==target){
+                
+                return mid;
+            }
+            else if(nums[mid]<target){
+                i = mid+1;
+            }
+            else{
+                j = mid-1;
+            }
+        }
+        return -1;
+    }
+    int search(vector<int>& nums, int target) {
+       int poviet = helper(nums);
+        cout<<poviet<<endl;
+        if(poviet==-1){
+            return bs(nums,0,nums.size()-1,target);
+        }
+        else{
+            if(nums[poviet]==target)return poviet;
+            int x = bs(nums,0,poviet,target);
+            //cout<<x<<endl;
+            int y = bs1(nums,poviet+1,nums.size()-1,target);
+            //cout<<y<<endl;
+            return max(x,y);
+        }
+        return -1;
+    }
